@@ -1,0 +1,27 @@
+module oj(n, g);
+    input logic [2:0] n;
+    output logic [2:0] g;
+
+    assign g[2] = n[2];
+    assign g[1] = n[1] ^ n[2];
+    assign g[0] = n[0] ^ n[1];
+endmodule
+
+
+module test;
+    reg [2:0] n;
+    wire [2:0] g;
+
+    oj I1 (n, g);
+
+    initial begin
+        n = 3'b000;
+        #10 n = 3'b001;
+        #10 n = 3'b010;
+        #10 n = 3'b011;
+        #10 n = 3'b100; 
+        #10 n = 3'b101;
+        #10 n = 3'b110;
+        #10 n = 3'b111;
+    end
+endmodule
