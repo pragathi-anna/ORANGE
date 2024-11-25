@@ -1,0 +1,32 @@
+module oi(a,b,ps,ns,y);
+input logic a,b;
+input logic[1:0] ps;
+output logic[1:0] ns;
+output logic y;
+assign ns[0]=a&~ps[1]&~ps[0];
+assign ns[1]=b&ps[0];
+always_comb
+begin
+if (ns==2'b10)
+y=1;
+else
+y=0;
+end 
+endmodule
+
+
+module test;
+reg a,b;
+reg[1:0]ps;
+wire[1:0]ns;
+wire y;
+oi I1 (a,b,ps,ns,y);
+initial
+begin
+ps=2'b00;a=0;b=1'bx;
+#10 ps=2'b00;a=1;b=1'bx;
+#10 ps=2'b01;a=1'bx;b=1'b0;
+#10 ps=2'b01;a=1'bx;b=1'b1;
+#10 ps=2'b10;a=1'bx;b=1'bx;
+end
+endmodule
